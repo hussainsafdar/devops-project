@@ -5,6 +5,13 @@ from __future__ import annotations
 import argparse
 import sys
 
+if __package__ in (None, ""):
+    # Allow running this file directly (python src/calculator/cli.py) by
+    # putting the src/ directory (the package's parent) on sys.path.
+    import os
+
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from calculator.operations import add, divide, multiply, subtract
 
 OPERATIONS = {

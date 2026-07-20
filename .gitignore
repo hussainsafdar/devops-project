@@ -6,3 +6,8 @@ dist/
 .pytest_cache/
 .venv/
 venv/
+
+# Node.js
+node_modules/
+npm-debug.log*
+

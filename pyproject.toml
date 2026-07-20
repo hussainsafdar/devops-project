@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "calculator"
 version = "0.1.0"
 description = "A small sample Python project."
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 
 [project.optional-dependencies]
 dev = ["pytest>=7"]
