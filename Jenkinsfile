@@ -2,16 +2,39 @@ pipeline {
     agent any
 
     stages {
-        stage('Environment Check') {
+
+        stage('Checkout') {
             steps {
-                sh 'echo PATH=$PATH'
-                sh 'which node || true'
-                sh 'node -v || true'
-                sh 'which npm || true'
-                sh 'npm -v || true'
-                sh 'which git || true'
-                sh 'git --version || true'
+                checkout scm
             }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t devops-project .'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
