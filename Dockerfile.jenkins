@@ -1,0 +1,17 @@
+FROM jenkins/jenkins:lts
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y git nodejs npm docker.io unzip wget && \
+    apt-get clean
+
+# Install SonarScanner
+RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.1.0.4889-linux-aarch64.zip && \
+    unzip sonar-scanner-cli-7.1.0.4889-linux-aarch64.zip -d /opt && \
+    mv /opt/sonar-scanner-* /opt/sonar-scanner && \
+    ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner && \
+    rm sonar-scanner-cli-7.1.0.4889-linux-aarch64.zip
+
+USER root
+
