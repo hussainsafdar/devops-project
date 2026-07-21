@@ -2,27 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Environment Check') {
             steps {
-                checkout scm
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                echo 'SonarQube analysis will be configured next.'
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t devops-project .'
+                sh 'echo PATH=$PATH'
+                sh 'which node || true'
+                sh 'node -v || true'
+                sh 'which npm || true'
+                sh 'npm -v || true'
+                sh 'which git || true'
+                sh 'git --version || true'
             }
         }
     }
