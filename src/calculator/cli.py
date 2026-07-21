@@ -6,7 +6,7 @@ import argparse
 import sys
 
 if __package__ in (None, ""):
-    # Allow running this file directly (python src/calculator/cli.py) by
+    # Allow running this files directly (python src/calculator/cli.py) by
     # putting the src/ directory (the package's parent) on sys.path.
     import os
 
