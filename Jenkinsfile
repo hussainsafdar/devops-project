@@ -29,7 +29,7 @@ pipeline {
                     -Dsonar.projectKey=devops-project \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://sonarqube:9000 \
-                    -Dsonar.login=YOUR_TOKEN
+                    -Dsonar.token=$SONAR_AUTH_TOKEN
                     '''
                 }
             }
@@ -39,6 +39,16 @@ pipeline {
             steps {
                 sh 'docker build -t devops-project .'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
