@@ -21,20 +21,24 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                    sonar-scanner \
+                    -Dsonar.projectKey=devops-project \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://sonarqube:9000 \
+                    -Dsonar.login=YOUR_TOKEN
+                    '''
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t devops-project .'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
